@@ -1,0 +1,21 @@
+*initial setup :
+    run docker desktop engine
+    docker --version
+    docker info
+    docker run hello-world
+
+create a folder named tomcat-web-app
+create index.html and enter the code (basic hello)
+create Dockerfile file and add 
+    FROM tomcat:10.1
+    COPY index.html /usr/local/tomcat/webapps/ROOT/index.html
+    EXPOSE 8080
+    CMD ["catalina.sh", "run"]
+
+go into tomcat folder 
+*build 
+    docker build -t tomcat-web-app .
+*run 
+    docker run -d -p 8080:8080 --name tomcat-web-container tomcat-web-app:latest
+*open 
+    http://localhost:8080

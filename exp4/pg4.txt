@@ -1,0 +1,51 @@
+initialize :
+    terraform -version
+    if not - install windows amd 64bit, unzip, put it in c drive-prgoram files. 
+    set env variables - got to system variable - path - new - paste - ok 
+
+*create folder "terraform"
+*create file "main.tf"
+    terraform {
+        required_providers {
+            docker = {
+            source  = "kreuzwerker/docker"
+            version = "~> 3.0.2"
+            }
+        }
+        }
+
+        provider "docker" {}
+
+        resource "docker_image" "nginx" {
+        name         = "nginx:latest"
+        keep_locally = true
+        }
+
+        resource "docker_container" "web" {
+        name  = "terraform-web-server"
+        image = docker_image.nginx.image_id
+        ports {
+            internal = 80
+            external = 8081
+        }
+        }
+
+        output "container_name" {
+        value = docker_container.web.name
+        }
+
+        output "web_url" {
+        value = "http://localhost:8081"
+        }
+
+cd terraform
+terraform init
+terraform validate
+terraform plan
+terraform apply
+docker ps
+terraform show
+make changes in main.tf (port - external 8085)
+terraform apply
+terraform destroy
+
