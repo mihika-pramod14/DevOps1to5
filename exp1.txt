@@ -1,0 +1,38 @@
+//working
+create folder
+create file - add text
+terminal :
+*initial 
+git init
+git config --global user.name "mihika-pramod14"
+git config --global user.email "vvce24cse0158@vvce.ac.in"
+git config --list
+git add .
+git commit -m "Initial commit"
+git status
+
+*Create a repository on GitHub, then copy its URL
+git remote add origin YOUR_GITHUB_REPOSITORY_URL
+git branch -M main
+git push -u origin main
+
+*create a branch
+git branch
+git checkout -b branch1
+git branch
+
+*make changes in file 
+git add .
+git commit -m "Updated commit"
+
+*switch to main and make changes
+git switch main
+git add .
+git commit -m "Updated in main branch"
+
+*merging
+git merge branch1
+git status
+
+*push 
+git push origin main
