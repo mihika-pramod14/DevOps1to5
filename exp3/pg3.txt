@@ -19,3 +19,7 @@ go into tomcat folder
     docker run -d -p 8080:8080 --name tomcat-web-container tomcat-web-app:latest
 *open 
     http://localhost:8080
+*pushing to dockerhub
+docker login (enter cred)
+docker tag tomcat-web-app:latest mihikapramod14/tomcat-web-app:latest
+docker push mihikapramod14/tomcat-web-app:latest
