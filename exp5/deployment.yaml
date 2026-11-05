@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-web-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tomcat-web
+  template:
+    metadata:
+      labels:
+        app: tomcat-web
+    spec:
+      containers:
+        - name: tomcat-container
+          image: tomcat-web-app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

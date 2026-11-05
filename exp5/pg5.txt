@@ -1,0 +1,50 @@
+run docker desktop engine
+kuberentes - kind - create cluster
+
+create deployment.yaml and service.yaml and type code
+* deployment.yaml
+
+            apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+            name: tomcat-web-deployment
+            spec:
+            replicas: 3
+            selector:
+                matchLabels:
+                app: tomcat-web
+            template:
+                metadata:
+                labels:
+                    app: tomcat-web
+                spec:
+                containers:
+                    - name: tomcat-container
+                    image: tomcat-web-app:latest
+                    imagePullPolicy: IfNotPresent
+                    ports:
+                        - containerPort: 8080
+
+*service.yaml
+            apiVersion: v1
+            kind: Service
+            metadata:
+            name: tomcat-web-service
+            spec:
+            type: NodePort
+            selector:
+                app: tomcat-web
+            ports:
+                - protocol: TCP
+                port: 8080
+                targetPort: 8080
+                nodePort: 30080
+
+kubectl apply -f depolyment.yaml
+kubectl apply -f service.yaml
+kubectl get pods 
+kubectl port-forward service/tomcat-web-service 8081:8080
+Invoke-WebRequest http://localhost:8081 -UseBasicParsing
+kubectl scale deployment tomcat-web-deployment --replicas=10
+kubectl delete pod tomcat-web-deployment-759bb4864f-7vmrv
+kubectl get endpointslices
